@@ -5,7 +5,7 @@ describe('User can sign up', () => {
     cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user2@mail.com')
       cy.get('#password').type('password2')
-      cy.get('#passwordConfirmation').type('password2')
+      cy.get('#password_confirmation').type('password2')
       cy.get('#submit').click()
     })
     cy.contains('Hi user2@mail.com')
@@ -17,7 +17,7 @@ describe('User can sign up', () => {
     cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user2@mail.com')
       cy.get('#password').type('password2')
-      cy.get('#passwordConfirmation').type('password2')
+      cy.get('#password_confirmation').type('password2')
       cy.get('#submit').click()
     })
     cy.contains('Email has already been taken')
@@ -29,7 +29,7 @@ describe('User can sign up', () => {
     cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user3@mail.com')
       cy.get('#password').type('password2')
-      cy.get('#passwordConfirmation').type('password23')
+      cy.get('#password_confirmation').type('password23')
       cy.get('#submit').click()
     })
     cy.contains("Password confirmation doesn't match Password")
@@ -41,7 +41,7 @@ describe('User can sign up', () => {
     cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user3@mail.com')
       cy.get('#password').type('pass')
-      cy.get('#passwordConfirmation').type('pass')
+      cy.get('#password_confirmation').type('pass')
       cy.get('#submit').click()
     })
     cy.contains('Password is too short (minimum is 6 characters)')
