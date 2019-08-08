@@ -4,7 +4,7 @@ import InputFields from "./Components/InputFields";
 import LoginForm from "./Components/LoginForm";
 
 class App extends Component {
-  onstructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       distance: "",
