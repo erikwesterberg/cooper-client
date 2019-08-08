@@ -3,6 +3,7 @@ import DisplayCooperResult from "./Components/DisplayCooperResult";
 import InputFields from "./Components/InputFields";
 import LoginForm from "./Components/LoginForm";
 import { authenticate } from "./Modules/Auth";
+import DisplayPerformanceData from "./Components/DisplayPerformanceData";
 
 class App extends Component {
   constructor(props) {
@@ -17,8 +18,24 @@ class App extends Component {
       password: "",
       message: "",
       entrySaved: false,
-      renderIndex: false
+      renderIndex: false,
+      updateIndex: false
     };
+  }
+
+  entryHandler() {
+    this.setState({ entrySaved: true, updateIndex: true });
+  }
+
+  indexUpdated() {
+    this.setState({ updateIndex: false });
+  }
+
+  onChange(event) {
+    this.setState({
+      [event.target.id]: event.target.value,
+      entrySaved: false
+    });
   }
 
   async onLogin(e) {
@@ -29,17 +46,6 @@ class App extends Component {
     } else {
       this.setState({ message: resp.message, renderLoginForm: false });
     }
-  }
-
-  entryHandler() {
-    this.setState({ entrySaved: true });
-  }
-
-  onChange(event) {
-    this.setState({
-      [event.target.id]: event.target.value,
-      entrySaved: false
-    });
   }
 
   render() {
@@ -58,6 +64,28 @@ class App extends Component {
           Show past entries
         </button>
       );
+      if (this.state.renderIndex === true) {
+        performanceDataIndex = (
+          <>
+            <DisplayPerformanceData
+              updateIndex={this.state.updateIndex}
+              indexUpdated={this.indexUpdated.bind(this)}
+            />
+            <button onClick={() => this.setState({ renderIndex: false })}>
+              Hide past entries
+            </button>
+          </>
+        );
+      } else {
+        performanceDataIndex = (
+          <button
+            id="show-index"
+            onClick={() => this.setState({ renderIndex: true })}
+          >
+            Show past entries
+          </button>
+        );
+      }
     } else {
       if (this.state.renderLoginForm === true) {
         renderLogin = (
