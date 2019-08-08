@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import CooperCalculator from '../Modules/CooperCalculator';
+import { saveData } from '../Modules/PerformanceData';
 
 class DisplayCooperResult extends Component {
 
     calculate() {
       return CooperCalculator(this.props.distance, this.props.gender, this.props.age)
+    }
+
+    async saveCooperData() {
+      const result = this.calculate();
+      try {
+        await saveData(result);
+        this.props.entryHandler();
+      } catch(error) {
+        console.log(error);
+      }
     }
 
     render() {
