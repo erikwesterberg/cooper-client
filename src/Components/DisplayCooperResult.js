@@ -7,23 +7,32 @@ class DisplayCooperResult extends Component {
       return CooperCalculator(this.props.distance, this.props.gender, this.props.age)
     }
 
-  render() {
-    let results
-    if (this.props.age !== '' && this.props.distance !== '') {
-      results = 
-      <div>
-        <p>{this.props.age} y/o {this.props.gender} running {this.props.distance} meters.</p>
-        <p>Result: {this.calculate()}</p>
-      </div>
+    render() {
+      let results;
+      let saveButton;
+    
+      if (this.props.authenticated === true) {
+        saveButton = (
+          <>
+            <button id="save-result" onClick={this.saveCooperData.bind(this)}>Save entry</button>
+          </>
+        )
+      }
+      if (this.props.age !== '' && this.props.distance !== '') {
+          results = (
+            <>
+              <p>{this.props.age} y/o {this.props.gender} running {this.props.distance} meters.</p> 
+              <p>Result: {this.calculate()}</p>
+              {saveButton}
+            </>
+          )
+        }
+      return (
+        <div>
+          {results}
+        </div>
+      )
     }
-
-
-    return (
-      <div>
-        {results}
-      </div>
-    )
-  }
 }
 
 export default DisplayCooperResult
