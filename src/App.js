@@ -4,7 +4,7 @@ import InputFields from "./Components/InputFields";
 import LoginForm from "./Components/LoginForm";
 import { authenticate } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
-import SignupForm from './Components/LoginForm';
+import SignupForm from "./Components/SignupForm";
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class App extends Component {
       authenticated: false,
       email: "",
       password: "",
-      passwordConfirmation: '',
+      passwordConfirmation: "",
       message: "",
       entrySaved: false,
       renderIndex: false,
@@ -50,6 +50,7 @@ class App extends Component {
       this.setState({ message: resp.message, renderLoginForm: false });
     }
   }
+  
 
   render() {
     let renderLogin;
@@ -91,7 +92,10 @@ class App extends Component {
         );
       }
     } else {
-      if (this.state.renderLoginForm === true && this.state.renderSignUpForm === false){
+      if (
+        this.state.renderLoginForm === true &&
+        this.state.renderSignupForm === false
+      ) {
         renderLogin = (
           <>
             <LoginForm
@@ -99,14 +103,17 @@ class App extends Component {
               inputChangeHandler={this.onChange.bind(this)}
             />
           </>
-          
-        )
-        renderSignUp = (
-          <>
-            <button id="sign-up" onClick={() => this.setState({ renderSignupForm: true, renderLoginForm: false})}>Sign Up</button>
-          </>
         );
-      } else if (this.state.renderLoginForm === false && this.state.renderSignUpForm === true) {
+      } else if (
+        this.state.renderLoginForm === false &&
+        this.state.renderSignupForm === true
+      ) {
+        renderSignUp = ( 
+        <>
+        <SignupForm />;
+        </>
+        );
+      } else {
         renderLogin = (
           <>
             <button
@@ -117,22 +124,25 @@ class App extends Component {
             </button>
             <p>{this.state.message}</p>
           </>
-        )
+        );
+          
         renderSignUp = (
-          <SignupForm
-          
-          />
-        
-          
+          <>
+            <button
+              id="sign-up"
+              onClick={() => this.setState({ renderSignupForm: true })}
+            >
+              Signup
+            </button>
+          </>
         );
       }
     }
-    
 
     return (
       <div>
         <InputFields inputChangeHandler={this.onChange.bind(this)} />
-        <button id="sign-up">Signup</button>
+
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
