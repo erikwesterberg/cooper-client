@@ -15,7 +15,8 @@ class App extends Component {
       authenticated: false,
       email: "",
       password: "",
-      message: ""
+      message: "",
+      entrySaved: false
     };
   }
 
@@ -27,6 +28,10 @@ class App extends Component {
     } else {
       this.setState({ message: resp.message, renderLoginForm: false });
     }
+  }
+
+  entryHandler() {
+    this.setState({ entrySaved: true });
   }
 
   onChange(event) {
