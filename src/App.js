@@ -7,24 +7,24 @@ class App extends Component {
   onstructor(props) {
     super(props);
     this.state = {
-      distance: '',
-      gender: 'female',
-      age: '',
+      distance: "",
+      gender: "female",
+      age: "",
       renderLoginForm: false,
       authenticated: false,
-      email: '',
-      password: '',
-      message: ''
-    }
+      email: "",
+      password: "",
+      message: ""
+    };
   }
 
   async onLogin(e) {
     e.preventDefault();
-    let resp = await authenticate(this.state.email, this.state.password)
+    let resp = await authenticate(this.state.email, this.state.password);
     if (resp.authenticated === true) {
       this.setState({ authenticated: true });
     } else {
-      this.setState({ message: resp.message, renderLoginForm: false })
+      this.setState({ message: resp.message, renderLoginForm: false });
     }
   }
 
@@ -35,22 +35,28 @@ class App extends Component {
   }
 
   render() {
-    let renderLogin
+    let renderLogin;
 
     if (this.state.renderLoginForm === true) {
       renderLogin = (
-        <LoginForm />
-      )
+        <LoginForm
+          loginHandler={this.onLogin.bind(this)}
+          inputChangeHandler={this.onChange.bind(this)}
+        />
+      );
     } else {
       renderLogin = (
-        <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
-      )
+        <button
+          id="login"
+          onClick={() => this.setState({ renderLoginForm: true })}
+        >
+          Login
+        </button>
+      );
     }
     return (
       <div>
-        <InputFields 
-          inputChangeHandler={this.onChange.bind(this)}
-        />
+        <InputFields inputChangeHandler={this.onChange.bind(this)} />
 
         <DisplayCooperResult
           distance={this.state.distance}
@@ -58,7 +64,6 @@ class App extends Component {
           age={this.state.age}
         />
         {renderLogin}
-
       </div>
     );
   }
