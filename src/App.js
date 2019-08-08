@@ -4,13 +4,27 @@ import InputFields from "./Components/InputFields";
 import LoginForm from "./Components/LoginForm";
 
 class App extends Component {
-  constructor(props) {
+  onstructor(props) {
     super(props);
     this.state = {
       distance: '',
       gender: 'female',
       age: '',
-      renderLoginForm: false
+      renderLoginForm: false,
+      authenticated: false,
+      email: '',
+      password: '',
+      message: ''
+    }
+  }
+
+  async onLogin(e) {
+    e.preventDefault();
+    let resp = await authenticate(this.state.email, this.state.password)
+    if (resp.authenticated === true) {
+      this.setState({ authenticated: true });
+    } else {
+      this.setState({ message: resp.message, renderLoginForm: false })
     }
   }
 
