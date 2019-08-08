@@ -52,6 +52,7 @@ class App extends Component {
     let renderLogin;
     let user;
     let performanceDataIndex;
+    let renderSignUp;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem("credentials")).uid;
@@ -110,11 +111,12 @@ class App extends Component {
         );
       }
     }
+    
 
     return (
       <div>
         <InputFields inputChangeHandler={this.onChange.bind(this)} />
-
+        <button id="sign-up">Signup</button>
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
