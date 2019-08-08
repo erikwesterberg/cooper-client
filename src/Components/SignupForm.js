@@ -1,8 +1,9 @@
 import React from 'react';
 
+
 const SignupForm = () => {
   return (
-    <form>
+    <form id="signUp-form">
       <div>
         <label >Email</label>
         <input id="email"></input>

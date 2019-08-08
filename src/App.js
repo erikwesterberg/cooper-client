@@ -4,6 +4,7 @@ import InputFields from "./Components/InputFields";
 import LoginForm from "./Components/LoginForm";
 import { authenticate } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
+import SignupForm from './Components/LoginForm';
 
 class App extends Component {
   constructor(props) {
@@ -13,9 +14,11 @@ class App extends Component {
       gender: "female",
       age: "",
       renderLoginForm: false,
+      renderSignupForm: false,
       authenticated: false,
       email: "",
       password: "",
+      passwordConfirmation: '',
       message: "",
       entrySaved: false,
       renderIndex: false,
@@ -88,7 +91,7 @@ class App extends Component {
         );
       }
     } else {
-      if (this.state.renderLoginForm === true) {
+      if (this.state.renderLoginForm === true && this.state.renderSignUpForm === false){
         renderLogin = (
           <>
             <LoginForm
@@ -96,8 +99,14 @@ class App extends Component {
               inputChangeHandler={this.onChange.bind(this)}
             />
           </>
+          
+        )
+        renderSignUp = (
+          <>
+            <button id="sign-up" onClick={() => this.setState({ renderSignupForm: true, renderLoginForm: false})}>Sign Up</button>
+          </>
         );
-      } else {
+      } else if (this.state.renderLoginForm === false && this.state.renderSignUpForm === true) {
         renderLogin = (
           <>
             <button
@@ -108,6 +117,13 @@ class App extends Component {
             </button>
             <p>{this.state.message}</p>
           </>
+        )
+        renderSignUp = (
+          <SignupForm
+          
+          />
+        
+          
         );
       }
     }
@@ -127,6 +143,7 @@ class App extends Component {
         />
         {performanceDataIndex}
         {renderLogin}
+        {renderSignUp}
       </div>
     );
   }

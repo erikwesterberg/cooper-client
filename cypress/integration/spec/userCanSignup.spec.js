@@ -2,7 +2,7 @@ describe('User can sign up', () => {
   it('succesfully', () => {
     cy.visit('http://localhost:3001');
     cy.get('#sign-up').click();
-    cy.get('#sign-up-form').within(() => {
+    cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user2@mail.com')
       cy.get('#password').type('password2')
       cy.get('#passwordConfirmation').type('password2')
@@ -14,7 +14,7 @@ describe('User can sign up', () => {
   it('but not when email is already taken', () => {
     cy.visit('http://localhost:3001');
     cy.get('#sign-up').click();
-    cy.get('#sign-up-form').within(() => {
+    cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user2@mail.com')
       cy.get('#password').type('password2')
       cy.get('#passwordConfirmation').type('password2')
@@ -26,7 +26,7 @@ describe('User can sign up', () => {
   it('but not when password and passwordConfirmation are not equal', () => {
     cy.visit('http://localhost:3001');
     cy.get('#sign-up').click();
-    cy.get('#sign-up-form').within(() => {
+    cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user3@mail.com')
       cy.get('#password').type('password2')
       cy.get('#passwordConfirmation').type('password23')
@@ -38,7 +38,7 @@ describe('User can sign up', () => {
   it('but not when password is less than six characters long', () => {
     cy.visit('http://localhost:3001');
     cy.get('#sign-up').click();
-    cy.get('#sign-up-form').within(() => {
+    cy.get('#signUp-form').within(() => {
       cy.get('#email').type('user3@mail.com')
       cy.get('#password').type('pass')
       cy.get('#passwordConfirmation').type('pass')
