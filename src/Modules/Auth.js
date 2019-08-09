@@ -17,13 +17,13 @@ const authenticate = async (email, password) => {
     return { authenticated: false, message: error.response.data.errors[0] };
   }
 };
-const authenticateSignUp = async (email, password, passwordConfirmation) => {
+const authenticateSignUp = async (email, password, password_confirmation) => {
   const path = apiUrl + "/auth/sign_up";
   try {
     let response = await axios.post(path, {
       email: email,
       password: password,
-      password_confirmation: passwordConfirmation
+      password_confirmation: password_confirmation
     });
    
     await storeAuthCredentials(response);

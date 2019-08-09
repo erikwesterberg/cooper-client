@@ -16,6 +16,7 @@ class App extends Component {
       age: "",
       renderLoginForm: false,
       renderSignupForm: false,
+      renderInputFields: false,
       authenticated: false,
       email: "",
       password: "",
@@ -41,6 +42,12 @@ class App extends Component {
       entrySaved: false
     });
   }
+
+  hideForm(e) {
+    if ( this.state.renderInputFields === true ) {
+      this.setState({ renderInputFields: false })}
+    }
+  
 
   async onLogin(e) {
     e.preventDefault();
@@ -69,6 +76,7 @@ class App extends Component {
     let user;
     let performanceDataIndex;
     let renderSignUp;
+    let renderInput
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem("credentials")).uid;
@@ -93,6 +101,7 @@ class App extends Component {
             </button>
           </>
         );
+      
       } else {
         performanceDataIndex = (
           <button
@@ -102,7 +111,10 @@ class App extends Component {
             Show past entries
           </button>
         );
+      
       }
+
+      
     } else {
       if (
         this.state.renderLoginForm === true &&
@@ -130,7 +142,27 @@ class App extends Component {
         
         </>
         );
+        } else if ( this.state.renderInputFields === true) {
+            renderInput = (
+            <>
+                <InputFields inputChangeHandler={this.onChange.bind(this)} 
+                hideHandler={this.hideForm.bind(this)}
+                />
+                
+            </>
+            )
+        
+        
       } else {
+
+        renderInput = (
+          <>
+          <div className="cooper">
+          <button className="button1" onClick={() => this.setState({ renderInputFields: true })}>David Goggins says RUN</button>
+          </div>
+          </>
+        )
+
         renderLogin = (
           <>
           <div className="login">
@@ -165,12 +197,8 @@ class App extends Component {
       
       <div className="container">
         <div className="left-bg">
-        <h1>Do you have what it takes?</h1>
-          <div class="sides">
-              <button className="logo">Cooper Challange</button>
-          </div>
-        <InputFields inputChangeHandler={this.onChange.bind(this)} />
-
+        <h1 className="h1">Do you have what it takes?</h1>
+        {renderInput}
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
@@ -184,7 +212,7 @@ class App extends Component {
         {performanceDataIndex}
         {renderLogin}
         {renderSignUp}
-        </div>
+         </div>
       </div>
     );
   }

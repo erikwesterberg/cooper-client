@@ -3,6 +3,7 @@ import React from 'react';
 const InputFields = (props) => {
   return (
     <>
+    <div className="input-data-form">
       <label>Distance</label>
       <input id="distance" onChange={props.inputChangeHandler}></input>
 
@@ -13,6 +14,8 @@ const InputFields = (props) => {
 
       <label>Age</label>
       <input id="age" onChange={props.inputChangeHandler}></input>
+      <button onClick={(e) => props.hideHandler(e)}  >Hide</button>
+      </div>
     </>
   )
 }

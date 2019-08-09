@@ -3,7 +3,7 @@ import React from 'react';
 
 const SignupForm = (props) => {
   return (
-    <form id="signUp-form">
+    <form id="signUp-form" className="input-data-form">
       <div>
         <label >Email</label>
         <input id="email" onChange={props.inputChangeHandler}></input>
