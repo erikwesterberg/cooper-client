@@ -1,23 +1,23 @@
 import React from 'react';
 
 
-const SignupForm = () => {
+const SignupForm = (props) => {
   return (
     <form id="signUp-form">
       <div>
         <label >Email</label>
-        <input id="email"></input>
+        <input id="email" onChange={props.inputChangeHandler}></input>
       </div>
 
       <div>
         <label>Password</label>
-        <input id="password"></input>
+        <input id="password" onChange={props.inputChangeHandler}></input>
       </div>
       <div>
         <label>Password Confirmation</label>
-        <input id="password_confirmation"></input>
+        <input id="password_confirmation" onChange={props.inputChangeHandler}></input>
       </div>
-      <button id="submit">Signup</button>
+      <button onClick={(e) => props.signupHandler(e)}  id="submit">Signup</button>
     </form>
   )
 }

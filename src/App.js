@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DisplayCooperResult from "./Components/DisplayCooperResult";
 import InputFields from "./Components/InputFields";
 import LoginForm from "./Components/LoginForm";
-import { authenticate } from "./Modules/Auth";
+import { authenticate, authenticateSignUp } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
 import SignupForm from "./Components/SignupForm";
 
@@ -48,6 +48,17 @@ class App extends Component {
       this.setState({ authenticated: true });
     } else {
       this.setState({ message: resp.message, renderLoginForm: false });
+    }
+  }
+
+
+  async onSignUp(e) {
+    e.preventDefault();
+    let resp = await authenticateSignUp(this.state.email, this.state.password, this.state.passwordConfirmation)
+    if (resp.authenticated === true) {
+      this.setState({ authenticated: true });
+    } else {
+      this.setState({ message: resp.message, renderSignUpForm: false })
     }
   }
   
@@ -110,7 +121,11 @@ class App extends Component {
       ) {
         renderSignUp = ( 
         <>
-        <SignupForm />;
+        <SignupForm 
+            signupHandler={this.onSignUp.bind(this)}
+            inputChangeHandler={this.onChange.bind(this)}
+        />;
+        
         </>
         );
       } else {

@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const apiUrl = "http://localhost:3000/api/v1";
 
 const authenticate = async (email, password) => {
@@ -14,6 +15,28 @@ const authenticate = async (email, password) => {
     return { authenticated: true };
   } catch (error) {
     return { authenticated: false, message: error.response.data.errors[0] };
+  }
+};
+const authenticateSignUp = async (email, password, passwordConfirmation) => {
+  const path = apiUrl + "/auth/sign_up";
+  try {
+    let response = await axios.post(path, {
+      email: email,
+      password: password,
+      password_confirmation: passwordConfirmation
+    });
+   
+    await storeAuthCredentials(response);
+    sessionStorage.setItem(
+      "current_user",
+      JSON.stringify({ id: response.data.data.id })
+    );
+    return { authenticated: true };
+  } catch (error) {
+    return {
+      authenticated: false,
+      message: error.response.data.errors.full_messages[0]
+    };
   }
 };
 
@@ -38,4 +61,4 @@ const storeAuthCredentials = ({ data, headers }) => {
   });
 };
 
-export { authenticate, storeAuthCredentials };
+export { authenticate, storeAuthCredentials, authenticateSignUp };
