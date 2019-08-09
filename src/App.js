@@ -95,18 +95,22 @@ class App extends Component {
               loginHandler={this.onLogin.bind(this)}
               inputChangeHandler={this.onChange.bind(this)}
             />
+            <button onClick={() => this.setState({ renderLoginForm: false })}>Hide</button>
           </>
         );
       } else {
         renderLogin = (
           <>
-            <button
-              id="login"
+          <div className="login">
+            <button 
+              id="login" 
               onClick={() => this.setState({ renderLoginForm: true })}
             >
               Login
             </button>
+            </div>
             <p>{this.state.message}</p>
+          
           </>
         );
       }
@@ -118,7 +122,10 @@ class App extends Component {
       
       <div className="container">
         <div className="left-bg">
-        
+        <h1>Do you have what it takes?</h1>
+          <div class="sides">
+              <button className="logo">Cooper Challange</button>
+          </div>
         <InputFields inputChangeHandler={this.onChange.bind(this)} />
 
         <DisplayCooperResult

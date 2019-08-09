@@ -1,34 +1,51 @@
-@import "bourbon";
 
-html {
-  font-family: sans-serif;
-  font-size: 13px;
+body {
+  height: 100vh;
+  font-family: 'Oswald', sans-serif;
 }
+
+.logo{
+  border:2px solid #fff;
+  border-radius:3px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  align-content:center;
+  margin:20px;
+  padding:0px 10px;
+  font-weight:600;
+  font-size:1.2em;
+  line-height:1;
+  box-sizing:border-box;
+  height:40px
+}
+
 .container {
   position: relative;
   background: #f1f1f1;
-  margin: 40px auto;
-  width: 80%;
-  height: 360px;
+  width: 100%;
+  height: 100vh;
 }
 .left-bg, .right-bg {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 50%;
   transition: .25s ease;
 }
+
 .left-bg {
-  background-color:#24800f;
+  background-color:#7F8688;
   left: 0;
+  width: 90%;
 }
 .right-bg {
-  background-color:#5988ad;
+  background-color:#F3E367;
   background-position: right;
   right: 0;
+  width: 10%;
 }
 .right-bg:before {
-  content: "OR";
+  content: ">>";
   font-weight: bold;
   position: absolute;
   background: white;
@@ -56,14 +73,22 @@ html {
   right: 0;
 }
 .left-bg:hover {
-  width: 60%;
+  width: 90%;
 }
 .left-bg:hover + .right-bg {
-  width: 40%;
+  width: 10%;
 }
 .right-bg:hover {
-  width: 60%;
+  width: 25%;
 }
 .right-bg:hover + .left-bg {
-  width: 40%;
+  width: 25%;
 }
+
+
+  
+
+
+  
+
+
