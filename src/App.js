@@ -5,6 +5,7 @@ import LoginForm from "./Components/LoginForm";
 import { authenticate, authenticateSignUp } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
 import SignupForm from "./Components/SignupForm";
+import './styling/main.scss'
 
 class App extends Component {
   constructor(props) {
@@ -113,6 +114,7 @@ class App extends Component {
               loginHandler={this.onLogin.bind(this)}
               inputChangeHandler={this.onChange.bind(this)}
             />
+            <button onClick={() => this.setState({ renderLoginForm: false })}>Hide</button>
           </>
         );
       } else if (
@@ -131,13 +133,16 @@ class App extends Component {
       } else {
         renderLogin = (
           <>
-            <button
-              id="login"
+          <div className="login">
+            <button 
+              id="login" 
               onClick={() => this.setState({ renderLoginForm: true })}
             >
               Login
             </button>
+            </div>
             <p>{this.state.message}</p>
+          
           </>
         );
           
@@ -154,8 +159,16 @@ class App extends Component {
       }
     }
 
+
+
     return (
-      <div>
+      
+      <div className="container">
+        <div className="left-bg">
+        <h1>Do you have what it takes?</h1>
+          <div class="sides">
+              <button className="logo">Cooper Challange</button>
+          </div>
         <InputFields inputChangeHandler={this.onChange.bind(this)} />
 
         <DisplayCooperResult
@@ -166,9 +179,12 @@ class App extends Component {
           entrySaved={this.state.entrySaved}
           entryHandler={this.entryHandler.bind(this)}
         />
+        </div>
+        <div className="right-bg">
         {performanceDataIndex}
         {renderLogin}
         {renderSignUp}
+        </div>
       </div>
     );
   }

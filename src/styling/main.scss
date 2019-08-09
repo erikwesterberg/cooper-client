@@ -1,0 +1,94 @@
+
+body {
+  height: 100vh;
+  font-family: 'Oswald', sans-serif;
+}
+
+.logo{
+  border:2px solid #fff;
+  border-radius:3px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  align-content:center;
+  margin:20px;
+  padding:0px 10px;
+  font-weight:600;
+  font-size:1.2em;
+  line-height:1;
+  box-sizing:border-box;
+  height:40px
+}
+
+.container {
+  position: relative;
+  background: #f1f1f1;
+  width: 100%;
+  height: 100vh;
+}
+.left-bg, .right-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: .25s ease;
+}
+
+.left-bg {
+  background-color:#7F8688;
+  left: 0;
+  width: 90%;
+}
+.right-bg {
+  background-color:#F3E367;
+  background-position: right;
+  right: 0;
+  width: 10%;
+}
+.right-bg:before {
+  content: ">>";
+  font-weight: bold;
+  position: absolute;
+  background: white;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 15px;
+  top: 150px;
+  left: 0;
+  -webkit-transform: translate(-50%, -50%);
+}
+.right-bg:after {
+  content: " ";
+  height: 280px;
+  width: 1px;
+  background-color: white;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20px;
+}
+.right-bg:after {
+  right: 0;
+}
+.left-bg:hover {
+  width: 90%;
+}
+.left-bg:hover + .right-bg {
+  width: 10%;
+}
+.right-bg:hover {
+  width: 25%;
+}
+.right-bg:hover + .left-bg {
+  width: 25%;
+}
+
+
+  
+
+
+  
+
+
