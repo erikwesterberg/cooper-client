@@ -4,6 +4,7 @@ import InputFields from "./Components/InputFields";
 import LoginForm from "./Components/LoginForm";
 import { authenticate } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
+import './styling/main.scss'
 
 class App extends Component {
   constructor(props) {
@@ -111,8 +112,13 @@ class App extends Component {
       }
     }
 
+
+
     return (
-      <div>
+      
+      <div className="container">
+        <div className="left-bg">
+        
         <InputFields inputChangeHandler={this.onChange.bind(this)} />
 
         <DisplayCooperResult
@@ -123,8 +129,11 @@ class App extends Component {
           entrySaved={this.state.entrySaved}
           entryHandler={this.entryHandler.bind(this)}
         />
+        </div>
+        <div className="right-bg">
         {performanceDataIndex}
         {renderLogin}
+        </div>
       </div>
     );
   }
