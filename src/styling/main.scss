@@ -4,7 +4,9 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 .h1 {
-  text-align: center
+  text-align: center;
+  color: #4BFFA5;
+  font-size: 60px
   
 }
 .logo{
@@ -37,12 +39,12 @@ body {
 }
 
 .left-bg {
-  background-color:#7F8688;
+  background-color: black;
   left: 0;
   width: 90%;
 }
 .right-bg {
-  background-color:#F3E367;
+  background-color:#7DA2A9;
   background-position: right;
   right: 0;
   width: 10%;
@@ -100,7 +102,7 @@ body {
   justify-content: center;
   align-items: center;
   color:#fd746c;
-  background: white;
+  background: #4BFFA5;
   border-radius:10px;
   height: 280px;
   width: 200px;
@@ -111,7 +113,21 @@ body {
 
   
 
+.button1 {
+  font-family: 'Oswald', sans-serif;
+  background-color:black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  border: 6px solid white;
+}
 
-  
-
-
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
