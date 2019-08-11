@@ -17,6 +17,7 @@ class App extends Component {
       renderLoginForm: false,
       renderSignupForm: false,
       renderInputFields: false,
+      renderDisplayCooperResult: false,
       authenticated: false,
       email: "",
       password: "",
@@ -77,6 +78,7 @@ class App extends Component {
     let performanceDataIndex;
     let renderSignUp;
     let renderInput
+    let renderdisplayResult
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem("credentials")).uid;
@@ -142,31 +144,41 @@ class App extends Component {
         
         </>
         );
-        } else if ( this.state.renderInputFields === true) {
+        } else if ( this.state.renderInputFields === true && this.state.renderDisplayCooperResult === true) {
             renderInput = (
             <>
                 <InputFields inputChangeHandler={this.onChange.bind(this)} 
                 hideHandler={this.hideForm.bind(this)}
                 />
-                
+                      <>
+                <DisplayCooperResult
+                  distance={this.state.distance}
+                  gender={this.state.gender}
+                  age={this.state.age}
+                  authenticated={this.state.authenticated}
+                  entrySaved={this.state.entrySaved}
+                  entryHandler={this.entryHandler.bind(this)}
+                />
+              </>
+                {/* <div style={{ backgroundColor: 'red', width: 300, height: 200, float: 'right' }}  ></div> */}
             </>
             )
-        
-        
+           
       } else {
 
         renderInput = (
           <>
           <div className="cooper">
-          <button className="button1" onClick={() => this.setState({ renderInputFields: true })}>David Goggins says RUN</button>
+          <button className="button1" onClick={() => this.setState({ renderInputFields: true, renderDisplayCooperResult: true })}>David Goggins says RUN</button>
+          <button className="button1">David Goggins says BMI</button>
           </div>
           </>
         )
 
         renderLogin = (
           <>
-          <div className="login">
-            <button 
+          <div className="cooper">
+            <button className="loginBtn"
               id="login" 
               onClick={() => this.setState({ renderLoginForm: true })}
             >
@@ -199,14 +211,7 @@ class App extends Component {
         <div className="left-bg">
         <h1 className="h1">Do you have what it takes?</h1>
         {renderInput}
-        <DisplayCooperResult
-          distance={this.state.distance}
-          gender={this.state.gender}
-          age={this.state.age}
-          authenticated={this.state.authenticated}
-          entrySaved={this.state.entrySaved}
-          entryHandler={this.entryHandler.bind(this)}
-        />
+        {renderdisplayResult}
         </div>
         <div className="right-bg">
         {performanceDataIndex}

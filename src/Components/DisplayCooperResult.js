@@ -45,7 +45,7 @@ class DisplayCooperResult extends Component {
           )
         }
       return (
-        <div>
+        <div className="input-data-form2">
           {results}
         </div>
       )

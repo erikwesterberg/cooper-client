@@ -5,8 +5,9 @@ body {
 }
 .h1 {
   text-align: center;
-  color: #4BFFA5;
-  font-size: 60px
+  color: black;
+  font-size: 60px;
+  margin-top: 60px;
   
 }
 .logo{
@@ -39,7 +40,7 @@ body {
 }
 
 .left-bg {
-  background-color: black;
+  background-color: yellow;
   left: 0;
   width: 90%;
 }
@@ -92,7 +93,7 @@ body {
 
 .cooper {
   text-align: center;
-  margin-top:300px;
+  margin-top:220px;
 }
 
 .input-data-form {
@@ -101,19 +102,59 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color:#fd746c;
-  background: #4BFFA5;
+  color:black;
+  background: yellow;
   border-radius:10px;
   height: 280px;
   width: 200px;
-  padding: 20px;
-  font-family: 'Josefin Sans', sans-serif;
+  padding: 40px;
+  font-family: 'Oswald', sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 50px;
+  
 }
 
-
+// .input-data-form2 {
+//   flex-wrap: wrap;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   color:white;
+//   background: black;
+//   border-radius:10px;
+//   height: 280px;
+//   width: 200px;
+//   padding: 40px;
+//   font-family: 'Oswald', sans-serif;
+//   margin-left: auto;
+//   margin-right: auto;
+//   font-size: 50px;
+//   display: inline-block;
+  
+// }
   
 
 .button1 {
+  font-family: 'Oswald', sans-serif;
+  background-color:white;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  margin: 4px 2px;
+  border: 6px solid black;
+}
+
+.button1:hover {
+  background-color: yellow;
+  color: white;
+}
+
+.loginBtn {
   font-family: 'Oswald', sans-serif;
   background-color:black;
   border: none;
@@ -127,7 +168,15 @@ body {
   border: 6px solid white;
 }
 
-.button1:hover {
+.loginBtn:hover {
   background-color: #4CAF50;
   color: white;
+}
+
+.inputform {
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 250px;
+  height: 50px;
 }
