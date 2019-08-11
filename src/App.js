@@ -6,8 +6,8 @@ import { authenticate, authenticateSignUp } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
 import SignupForm from "./Components/SignupForm";
 import "./styling/main.scss";
-
 import InputBmi from "./Components/InputBmi";
+import DisplayBMIResult from "./Components/DisplayResult";
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class App extends Component {
       entrySaved: false,
       renderIndex: false,
       updateIndex: false,
-      renderDisplayBmi: false,
+      renderDisplayBMIResult: false,
       renderInputBmi: false,
       weight: "",
       height: "",
@@ -54,15 +54,26 @@ class App extends Component {
   hideForm(e) {
     if (this.state.renderInputFields === true) {
       this.setState({ renderInputFields: false });
-    } 
-  }
-
-  hideBmi(e) {
-    if(this.state.renderInputBmi === true ) {
-      this.setState({ renderInputBmi: false})
     }
   }
 
+  hideBmi(e) {
+    if (this.state.renderInputBmi === true) {
+      this.setState({ renderInputBmi: false });
+    }
+  }
+
+  methodChange = event => {
+    this.setState({ method: event.target.value });
+  };
+
+  heightChange = event => {
+    this.setState({ height: event.target.value });
+  };
+
+  weightChange = event => {
+    this.setState({ weight: event.target.value });
+  };
 
   async onLogin(e) {
     e.preventDefault();
@@ -94,9 +105,9 @@ class App extends Component {
     let performanceDataIndex;
     let renderSignUp;
     let renderInput;
-    let renderdisplayResult;
-    let renderDisplayBmi;
+    // let renderdisplayResult;
     let renderInputBmi;
+    let renderDisplayBMI;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem("credentials")).uid;
@@ -183,16 +194,30 @@ class App extends Component {
             {/* <div style={{ backgroundColor: 'red', width: 300, height: 200, float: 'right' }}  ></div> */}
           </>
         );
-      } else if (this.state.renderInputBmi === true) {
+      } else if (
+        this.state.renderInputBmi === true &&
+        this.state.renderDisplayBMIResult === true
+      ) {
         renderInputBmi = (
-        <>
-          <InputBmi
-          hideBMI={this.hideBmi.bind(this)}
-          />
-          
-          
-        </>
-        )
+          <>
+            <InputBmi
+              method={this.state.method}
+              height={this.state.height}
+              weight={this.state.weight}
+              onChangeValue={this.methodChange}
+              onValueChange={this.heightChange}
+              ValueChange={this.weightChange}
+              hideBMI={this.hideBmi.bind(this)}
+            />
+            <>
+              <DisplayBMIResult
+                weight={this.state.weight}
+                height={this.state.height}
+                method={this.state.method}
+              />
+            </>
+          </>
+        );
       } else {
         renderInput = (
           <>
@@ -210,7 +235,12 @@ class App extends Component {
               </button>
               <button
                 className="button1"
-                onClick={() => this.setState({ renderInputBmi: true })}
+                onClick={() =>
+                  this.setState({
+                    renderInputBmi: true,
+                    renderDisplayBMIResult: true
+                  })
+                }
               >
                 David Goggins says BMI
               </button>
@@ -252,8 +282,8 @@ class App extends Component {
           <h1 className="h1">Do you have what it takes?</h1>
           {renderInputBmi}
           {renderInput}
-          {renderdisplayResult}
-          {renderDisplayBmi}
+          {/* {renderdisplayResult} */}
+          {renderDisplayBMI}
         </div>
         <div className="right-bg">
           {performanceDataIndex}
