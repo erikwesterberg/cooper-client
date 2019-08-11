@@ -6,6 +6,8 @@ import { authenticate, authenticateSignUp } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
 import SignupForm from "./Components/SignupForm";
 import './styling/main.scss'
+import DisplayResult from "./Components/displayResult";
+import MethodSelect from "./Components/MethodSelect";
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +27,10 @@ class App extends Component {
       message: "",
       entrySaved: false,
       renderIndex: false,
-      updateIndex: false
+      updateIndex: false,
+      weight: "",
+      height: "",
+      method: "metric"
     };
   }
 
