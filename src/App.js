@@ -268,12 +268,14 @@ class App extends Component {
 
         renderSignUp = (
           <>
-            <button
+          <div className="cooper">
+            <button className="loginBtn"
               id="sign-up"
               onClick={() => this.setState({ renderSignupForm: true })}
             >
               Signup
             </button>
+            </div>
           </>
         );
       }
