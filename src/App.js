@@ -168,7 +168,10 @@ class App extends Component {
               signupHandler={this.onSignUp.bind(this)}
               inputChangeHandler={this.onChange.bind(this)}
             />
-            ;
+              <button onClick={() => this.setState({ renderSignupForm: false })}>
+              Hide
+            </button>
+            
           </>
         );
       } else if (
