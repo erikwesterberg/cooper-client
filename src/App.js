@@ -5,9 +5,9 @@ import LoginForm from "./Components/LoginForm";
 import { authenticate, authenticateSignUp } from "./Modules/Auth";
 import DisplayPerformanceData from "./Components/DisplayPerformanceData";
 import SignupForm from "./Components/SignupForm";
-import './styling/main.scss'
-import DisplayResult from "./Components/displayResult";
-import MethodSelect from "./Components/MethodSelect";
+import "./styling/main.scss";
+
+import InputBmi from "./Components/InputBmi";
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +28,8 @@ class App extends Component {
       entrySaved: false,
       renderIndex: false,
       updateIndex: false,
+      renderDisplayBmi: false,
+      renderInputBmi: false,
       weight: "",
       height: "",
       method: "metric"
@@ -50,10 +52,17 @@ class App extends Component {
   }
 
   hideForm(e) {
-    if ( this.state.renderInputFields === true ) {
-      this.setState({ renderInputFields: false })}
+    if (this.state.renderInputFields === true) {
+      this.setState({ renderInputFields: false });
+    } 
+  }
+
+  hideBmi(e) {
+    if(this.state.renderInputBmi === true ) {
+      this.setState({ renderInputBmi: false})
     }
-  
+  }
+
 
   async onLogin(e) {
     e.preventDefault();
@@ -65,25 +74,29 @@ class App extends Component {
     }
   }
 
-
   async onSignUp(e) {
     e.preventDefault();
-    let resp = await authenticateSignUp(this.state.email, this.state.password, this.state.passwordConfirmation)
+    let resp = await authenticateSignUp(
+      this.state.email,
+      this.state.password,
+      this.state.passwordConfirmation
+    );
     if (resp.authenticated === true) {
       this.setState({ authenticated: true });
     } else {
-      this.setState({ message: resp.message, renderSignUpForm: false })
+      this.setState({ message: resp.message, renderSignUpForm: false });
     }
   }
-  
 
   render() {
     let renderLogin;
     let user;
     let performanceDataIndex;
     let renderSignUp;
-    let renderInput
-    let renderdisplayResult
+    let renderInput;
+    let renderdisplayResult;
+    let renderDisplayBmi;
+    let renderInputBmi;
 
     if (this.state.authenticated === true) {
       user = JSON.parse(sessionStorage.getItem("credentials")).uid;
@@ -108,7 +121,6 @@ class App extends Component {
             </button>
           </>
         );
-      
       } else {
         performanceDataIndex = (
           <button
@@ -118,10 +130,7 @@ class App extends Component {
             Show past entries
           </button>
         );
-      
       }
-
-      
     } else {
       if (
         this.state.renderLoginForm === true &&
@@ -133,68 +142,97 @@ class App extends Component {
               loginHandler={this.onLogin.bind(this)}
               inputChangeHandler={this.onChange.bind(this)}
             />
-            <button onClick={() => this.setState({ renderLoginForm: false })}>Hide</button>
+            <button onClick={() => this.setState({ renderLoginForm: false })}>
+              Hide
+            </button>
           </>
         );
       } else if (
         this.state.renderLoginForm === false &&
         this.state.renderSignupForm === true
       ) {
-        renderSignUp = ( 
-        <>
-        <SignupForm 
-            signupHandler={this.onSignUp.bind(this)}
-            inputChangeHandler={this.onChange.bind(this)}
-        />;
-        
-        </>
+        renderSignUp = (
+          <>
+            <SignupForm
+              signupHandler={this.onSignUp.bind(this)}
+              inputChangeHandler={this.onChange.bind(this)}
+            />
+            ;
+          </>
         );
-        } else if ( this.state.renderInputFields === true && this.state.renderDisplayCooperResult === true) {
-            renderInput = (
-            <>
-                <InputFields inputChangeHandler={this.onChange.bind(this)} 
-                hideHandler={this.hideForm.bind(this)}
-                />
-                      <>
-                <DisplayCooperResult
-                  distance={this.state.distance}
-                  gender={this.state.gender}
-                  age={this.state.age}
-                  authenticated={this.state.authenticated}
-                  entrySaved={this.state.entrySaved}
-                  entryHandler={this.entryHandler.bind(this)}
-                />
-              </>
-                {/* <div style={{ backgroundColor: 'red', width: 300, height: 200, float: 'right' }}  ></div> */}
-            </>
-            )
-           
-      } else {
-
+      } else if (
+        this.state.renderInputFields === true &&
+        this.state.renderDisplayCooperResult === true
+      ) {
         renderInput = (
           <>
-          <div className="cooper">
-          <button className="button1" onClick={() => this.setState({ renderInputFields: true, renderDisplayCooperResult: true })}>David Goggins says RUN</button>
-          <button className="button1">David Goggins says BMI</button>
-          </div>
+            <InputFields
+              inputChangeHandler={this.onChange.bind(this)}
+              hideHandler={this.hideForm.bind(this)}
+            />
+            <>
+              <DisplayCooperResult
+                distance={this.state.distance}
+                gender={this.state.gender}
+                age={this.state.age}
+                authenticated={this.state.authenticated}
+                entrySaved={this.state.entrySaved}
+                entryHandler={this.entryHandler.bind(this)}
+              />
+            </>
+            {/* <div style={{ backgroundColor: 'red', width: 300, height: 200, float: 'right' }}  ></div> */}
           </>
+        );
+      } else if (this.state.renderInputBmi === true) {
+        renderInputBmi = (
+        <>
+          <InputBmi
+          hideBMI={this.hideBmi.bind(this)}
+          />
+          
+          
+        </>
         )
+      } else {
+        renderInput = (
+          <>
+            <div className="cooper">
+              <button
+                className="button1"
+                onClick={() =>
+                  this.setState({
+                    renderInputFields: true,
+                    renderDisplayCooperResult: true
+                  })
+                }
+              >
+                David Goggins says RUN
+              </button>
+              <button
+                className="button1"
+                onClick={() => this.setState({ renderInputBmi: true })}
+              >
+                David Goggins says BMI
+              </button>
+            </div>
+          </>
+        );
 
         renderLogin = (
           <>
-          <div className="cooper">
-            <button className="loginBtn"
-              id="login" 
-              onClick={() => this.setState({ renderLoginForm: true })}
-            >
-              Login
-            </button>
+            <div className="cooper">
+              <button
+                className="loginBtn"
+                id="login"
+                onClick={() => this.setState({ renderLoginForm: true })}
+              >
+                Login
+              </button>
             </div>
             <p>{this.state.message}</p>
-          
           </>
         );
-          
+
         renderSignUp = (
           <>
             <button
@@ -208,21 +246,20 @@ class App extends Component {
       }
     }
 
-
-
     return (
-      
       <div className="container">
         <div className="left-bg">
-        <h1 className="h1">Do you have what it takes?</h1>
-        {renderInput}
-        {renderdisplayResult}
+          <h1 className="h1">Do you have what it takes?</h1>
+          {renderInputBmi}
+          {renderInput}
+          {renderdisplayResult}
+          {renderDisplayBmi}
         </div>
         <div className="right-bg">
-        {performanceDataIndex}
-        {renderLogin}
-        {renderSignUp}
-         </div>
+          {performanceDataIndex}
+          {renderLogin}
+          {renderSignUp}
+        </div>
       </div>
     );
   }
